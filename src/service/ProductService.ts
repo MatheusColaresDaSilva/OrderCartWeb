@@ -1,4 +1,4 @@
-import axios from 'axios';
+import axios, { AxiosResponse } from 'axios';
 
 const BASE_URL = 'http://localhost:8080/api/v1/item';
 
@@ -28,6 +28,7 @@ const BASE_URL = 'http://localhost:8080/api/v1/item';
 // };
 
 type Product = {
+  id?: number;
   description: string;
 };
 
@@ -35,9 +36,16 @@ async function createNewProduct(product: Product): Promise<Product | null> {
     return await axios.post(BASE_URL, product);
 }
 
+async function findAllProducts(): Promise<AxiosResponse> {
+  return await axios.get(BASE_URL);
+
+}
+
+
 // Export API methods
 const exportedObject = {
-  createNewProduct
+  createNewProduct,
+  findAllProducts
 };
 
 export default exportedObject;
