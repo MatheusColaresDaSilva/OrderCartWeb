@@ -16,11 +16,13 @@ const NewProduct: React.FC = () => {
           }).catch(error => {
             alert(`Error: ${error.message}`);
           });
+    
+        ;
     }
 
     return (
         <div className="container">
-            <h1>Create New Product</h1>
+            <h3>Create New Product</h3>
             <Formik
                     initialValues={{
                        description: '',
@@ -31,10 +33,9 @@ const NewProduct: React.FC = () => {
 
                 >{ formik => (
                     <Form>
-                        <label htmlFor="description">Description</label>
                         <Field id="description" name="description" type="text" placeholder='Type the product name'/>
 
-                        <button type="submit">Submit</button>
+                        <button type="submit">Create</button>
                     </Form>
                     )}
             </Formik>

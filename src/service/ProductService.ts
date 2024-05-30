@@ -38,11 +38,9 @@ async function createNewProduct(product: Product): Promise<Product | null> {
 
 async function findAllProducts(): Promise<AxiosResponse> {
   return await axios.get(BASE_URL);
-
 }
 
 
-// Export API methods
 const exportedObject = {
   createNewProduct,
   findAllProducts
