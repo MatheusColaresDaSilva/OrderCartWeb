@@ -36,8 +36,13 @@ async function createNewProduct(product: Product): Promise<Product | null> {
     return await axios.post(BASE_URL, product);
 }
 
-async function findAllProducts(): Promise<AxiosResponse> {
-  return await axios.get(BASE_URL);
+async function findAllProducts(page: number, size: number ): Promise<AxiosResponse> {
+  return await axios.get(BASE_URL, {
+    params: {
+      page: page,
+      size: size 
+    }
+  });
 }
 
 
