@@ -1,48 +1,35 @@
-import axios, { AxiosResponse } from 'axios';
-
-const BASE_URL = 'http://localhost:8080/api/v1/item';
-
-// const apiClient = axios.create({
-//   baseURL: BASE_URL,
-//   headers: {
-//     'Content-Type': 'application/json',
-//     // You can add other headers like authorization token here
-//   },
-// });
-
-// Define common API methods
-// const _get = (url, config = {}) => {
-//   return apiClient.get(url, config);
-// };
-
-// const _delete = (url, config = {}) => {
-//   return apiClient.delete(url, config);
-// };
-
-// const _put = (url, data = {}, config = {}) => {
-//   return apiClient.put(url, data, config);
-// };
-
-// const _post = (url, data = {}, config = {}) => {
-//   return apiClient.post(url, data, config);
-// };
+import client from '../graphql/apolloClient';
+import { GET_PRODUCTS, CREATE_PRODUCT } from '../graphql/queries';
 
 type Product = {
   id?: number;
   description: string;
 };
 
-async function createNewProduct(product: Product): Promise<Product | null> {
-    return await axios.post(BASE_URL, product);
+async function createNewProduct(product: Product) {
+  try {
+    const { data } = await client.mutate({
+      mutation: CREATE_PRODUCT,
+      variables: { description: product.description },
+    });
+    return data.getProducts;
+  } catch (error) {
+    console.error("Error creating user:", error);
+    throw error;
+  }
 }
 
-async function findAllProducts(page: number, size: number ): Promise<AxiosResponse> {
-  return await axios.get(BASE_URL, {
-    params: {
-      page: page,
-      size: size 
-    }
-  });
+async function findAllProducts(page: number, size: number) {
+  try {
+    const { data } = await client.query({
+      query: GET_PRODUCTS,
+      variables: { page, size },
+    });
+    return data.getProducts.content;
+  } catch (error) {
+    console.error("Error fetching Products:", error);
+    throw error;
+  }
 }
 
 

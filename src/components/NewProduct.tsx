@@ -11,12 +11,11 @@ const NewProduct: React.FC = () => {
 
     const createNewProduct = (value: Values) => {
         return ProductService.createNewProduct(value)
-        .then((response) => {
+        .then((response:any) => {
             alert('New product added');
-          }).catch(error => {
+          }).catch((error:any) => {
             alert(`Error: ${error.message}`);
           });
-    
         ;
     }
 

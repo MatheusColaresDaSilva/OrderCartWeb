@@ -27,10 +27,10 @@ const ListProducts: React.FC = () => {
   useEffect(()=> {
     setLoading(true);
     ProductService.findAllProducts(page, rows)
-    .then((response) => {
-        setProducts(response.data.dados.content);
-        setTotalRecords(response.data.dados.totalElements);
-      }).catch(error => {
+    .then((response: any) => {
+        setProducts(response.content);
+        setTotalRecords(response.totalElements);
+      }).catch((error: any) => {
         alert(`Error: ${error.message}`);
       }).finally(()=> {
         setLoading(false);
