@@ -5,8 +5,10 @@ export const GET_PRODUCTS = gql`
     getProducts(page: $page, size: $size) {
       content {
         content {
-          id
-          description
+          ... on Product {
+            id
+            description
+          }
         }
         totalElements
       }
