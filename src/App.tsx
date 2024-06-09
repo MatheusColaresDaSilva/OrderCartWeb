@@ -1,20 +1,26 @@
 import Sidebar from './components/Sidebar';
-import NewProduct from './components/NewProduct';
-import ListProducts from './components/ListProducts';
 import './App.css';
-import ListPeople from './components/ListPeople';
+import CustomBrowserRouter from './routes/routes';
+import { BrowserRouter } from 'react-router-dom';
 
 function App() {
   return (
-    <div className="App">
-      <Sidebar />
-      <div className="main-content">
-        <NewProduct />
-        <ListProducts />
-        <ListPeople />
+    <BrowserRouter>
+      <div className="App">
+        <Sidebar />
+        <div className="main-content">
+          <CustomBrowserRouter />
+        </div>
       </div>
-    </div>
-  );
+    </BrowserRouter>
+
+    // <div className="App">
+    //   <Sidebar />
+    //   <div className="main-content">
+    //     <CustomBrowserRouter/>
+    //   </div>
+    // </div>
+  ); 
 }
 
 export default App;

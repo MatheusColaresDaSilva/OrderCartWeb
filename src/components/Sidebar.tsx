@@ -1,11 +1,15 @@
 import React from "react";
 import '../styles/Sidebar.css';
 import { useReducer } from "react";
+import { useNavigate } from 'react-router-dom';
 
 import { FaArrowAltCircleRight, FaArrowAltCircleLeft, FaProductHunt } from 'react-icons/fa';
 
 
 const Sidebar: React.FC = () => {
+   const navigate = useNavigate();
+   const handleClick = (route: string) => navigate(route);
+
    const [isExpanded, setIsExpanded] = useReducer((isExpanded)=> !isExpanded, false);
 
     return (
@@ -16,9 +20,9 @@ const Sidebar: React.FC = () => {
                 }
               </button>
 
-              <a href="#home">
+              <button onClick={() => handleClick('/person')}>
                 <FaProductHunt /> {isExpanded && <span> Product </span>}
-              </a>
+              </button>
             </div>
             
       );
