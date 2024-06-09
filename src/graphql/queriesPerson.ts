@@ -18,3 +18,11 @@ export const GET_PEOPLE = gql`
   }
 `;
 
+export const CREATE_PERSON = gql`
+  mutation CreatePerson($person: Person!) {
+    createPerson(description: $description) {
+      id
+      name
+    }
+  }
+`;

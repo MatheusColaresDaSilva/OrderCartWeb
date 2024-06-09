@@ -1,5 +1,5 @@
 import client from '../graphql/apolloClient';
-import { GET_PEOPLE } from '../graphql/queriesPerson';
+import { GET_PEOPLE, CREATE_PERSON } from '../graphql/queriesPerson';
 
 type Person = {
   id?: number;
@@ -8,6 +8,18 @@ type Person = {
   birthDate: Date;
 };
 
+async function createNewProduct(person: Person) {
+  try {
+    const { data } = await client.mutate({
+      mutation: CREATE_PERSON,
+      variables: { person: person },
+    });
+    return data.getProducts;
+  } catch (error) {
+    console.error("Error creating user:", error);
+    throw error;
+  }
+}
 
 
 async function findAllPeople(page: number, size: number) {
@@ -26,7 +38,8 @@ async function findAllPeople(page: number, size: number) {
 
 
 const exportedObject = {
-  findAllPeople
+  findAllPeople,
+  createNewProduct
 };
 
 export default exportedObject;
