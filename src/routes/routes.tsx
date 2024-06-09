@@ -1,7 +1,7 @@
-import { BrowserRouter, Route, Routes } from 'react-router-dom';
+import { Route, Routes } from 'react-router-dom';
 import PersonPage from "../components/PersonPage";
 import Home from '../components/Home';
-import Sidebar from '../components/Sidebar';
+import ProductPage from '../components/ProductPage';
 
 export const routes = [
     {
@@ -12,6 +12,11 @@ export const routes = [
     {
       path: '/person',
       component: <PersonPage/>,
+      children: []
+    },
+    {
+      path: '/product',
+      component: <ProductPage/>,
       children: []
     }
   ];

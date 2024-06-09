@@ -3,6 +3,7 @@ import '../styles/FabButton.css';
 
 type Props = {
     label: string,
+    value: JSX.Element | string,
     action: () => void;
 }
 
@@ -22,11 +23,9 @@ const FabButton: React.FC< { options: Props[] } > = ({ options }) =>{
 
      
         {options.map((option, index) => (
-          <div className="option-wrapper" key={index}>
-          <label className="option-label">{option.label}</label>
-          <button className="option" onClick={option.action}>
-            {index + 1} {/* Índice + 1 para exibir os números dos botões */}
-          </button>
+        <div className="option-wrapper" key={index}>
+            <label className="option-label">{option.label}</label>
+            <button className="option" onClick={option.action}> {option.value} </button>
         </div>
         ))}
       </div>

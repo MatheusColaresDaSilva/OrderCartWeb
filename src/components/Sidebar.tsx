@@ -3,7 +3,7 @@ import '../styles/Sidebar.css';
 import { useReducer } from "react";
 import { useNavigate } from 'react-router-dom';
 
-import { FaArrowAltCircleRight, FaArrowAltCircleLeft, FaProductHunt } from 'react-icons/fa';
+import { FaArrowAltCircleRight, FaArrowAltCircleLeft, FaProductHunt, FaDrumstickBite } from 'react-icons/fa';
 
 
 const Sidebar: React.FC = () => {
@@ -14,14 +14,18 @@ const Sidebar: React.FC = () => {
 
     return (
             <div className={`sidenav ${isExpanded ? 'expanded' : 'collapsed'}`}>
-              <button className="toggle-btn" onClick={setIsExpanded}>
-               {
-                 !isExpanded ? <FaArrowAltCircleRight /> : <FaArrowAltCircleLeft /> 
-                }
-              </button>
 
-              <button onClick={() => handleClick('/person')}>
-                <FaProductHunt /> {isExpanded && <span> Product </span>}
+             <div className="top-buttons">
+                <button className="top-button" onClick={() => handleClick('/person')}>
+                  <FaProductHunt /> {isExpanded && <span> Person </span>}
+                </button>
+                <button className="top-button" onClick={() => handleClick('/product')}>
+                  <FaDrumstickBite  /> {isExpanded && <span> Product </span>}
+                </button>
+              </div>
+
+              <button className="toggle-btn" onClick={setIsExpanded}>
+                {!isExpanded ? <FaArrowAltCircleRight /> : <FaArrowAltCircleLeft />}
               </button>
             </div>
             

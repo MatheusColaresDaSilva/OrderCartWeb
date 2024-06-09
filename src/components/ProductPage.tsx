@@ -1,12 +1,12 @@
 import React from 'react';
-import ListPeople from './ListPeople';
 import FabButton from './FabButton';
 import { FaAddressCard } from 'react-icons/fa';
+import ListProducts from './ListProducts';
 
-const PersonPage: React.FC = () => {
+const ProductPage: React.FC = () => {
   return (
     <>
-      <ListPeople />
+      <ListProducts />
       <FabButton options={[
             {label: 'Create', value: <FaAddressCard/>,  action: ()=> alert('Create')},
           ]}/>
@@ -14,4 +14,4 @@ const PersonPage: React.FC = () => {
   );
 };
 
-export default PersonPage;
+export default ProductPage;
