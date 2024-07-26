@@ -4,17 +4,20 @@ import { GET_PEOPLE, CREATE_PERSON } from '../graphql/queriesPerson';
 type Person = {
   id?: number;
   name: string;
-  sin: string;
+  sinNumber: number;
   birthDate: Date;
 };
 
-async function createNewProduct(person: Person) {
+async function createNewPerson(person: Person) {
+  console.log('Person object being sent:', person)
   try {
     const { data } = await client.mutate({
       mutation: CREATE_PERSON,
-      variables: { person: person },
+      variables: { person },
     });
-    return data.getProducts;
+
+    console.log('Data returned:' ,data)
+    return data;
   } catch (error) {
     console.error("Error creating user:", error);
     throw error;
@@ -39,7 +42,7 @@ async function findAllPeople(page: number, size: number) {
 
 const exportedObject = {
   findAllPeople,
-  createNewProduct
+  createNewPerson
 };
 
 export default exportedObject;

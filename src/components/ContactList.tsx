@@ -10,17 +10,29 @@ interface Contact {
 
 interface ContactListProps {
   contacts: Contact[];
+  newContact: Contact;
   errors?: any;
 }
 
-const ContactList: React.FC<ContactListProps> = ({ contacts, errors }) => {
+const ContactList: React.FC<ContactListProps> = ({ contacts, newContact, errors }) => {
+
+  const resetForm = () => {
+    newContact.name = '';
+    newContact.phone = '';
+    newContact.email = '';
+  }
+
   return (
     <FieldArray name="contacts">
-      {({ push, remove }) => (
+      {({ push, remove, }) => (
         <div>
           <div className="contact-header">
             <h3>Contacts</h3>
-            <button type="button" className="add-contact-button" onClick={() => push({ name: '', phone: '', email: '' })}>+</button>
+            <button type="button" className="add-contact-button" onClick={() => {
+                  push({ name: newContact.name, phone: newContact.phone, email: newContact.email });
+                  resetForm();
+              }
+            }>+</button>
           </div>
           <ul className="contact-list">
             {contacts.map((contact, index) => (

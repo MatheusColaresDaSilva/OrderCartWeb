@@ -19,9 +19,9 @@ export const GET_PEOPLE = gql`
 `;
 
 export const CREATE_PERSON = gql`
-  mutation CreatePerson($person: Person!) {
-    createPerson(description: $description) {
-      id
+  mutation CreatePerson($person: PersonInput!) {
+    createPerson(person: $person) {
+      id             
       name
     }
   }

@@ -5,16 +5,16 @@ import ContactList from './ContactList';
 import '../styles/nois.css';
 import PersonService from '../service/PersonService';
 
-type Contact {
+interface Contact {
   name: string;
   phone: string;
   email: string;
 }
 
-type PersonFormValues {
+interface PersonFormValues {
   name: string;
   sinNumber: number;
-  birthDate: string;
+  birthDate: Date;
   contacts: Contact[];
   newContact: Contact;
 }
@@ -29,25 +29,20 @@ const validationSchema = Yup.object({
       phone: Yup.string().required('Contact phone is required'),
       email: Yup.string().email('Invalid email').required('Contact email is required')
     })
-  ),
-  newContact: Yup.object().shape({
-    name: Yup.string().required('Name is required'),
-    phone: Yup.string().required('Phone is required'),
-    email: Yup.string().email('Invalid email').required('Email is required')
-  })
+  )
 });
 
 const PersonForm: React.FC = () => {
   const initialValues: PersonFormValues = {
     name: '',
     sinNumber: 0,
-    birthDate: '',
+    birthDate: new Date(),
     contacts: [],
     newContact: { name: '', phone: '', email: '' }
   };
 
   const createNewPerson = (value: PersonFormValues) => {
-    return PersonService.createNewProduct(value)
+    return PersonService.createNewPerson(value)
     .then((response:any) => {
         alert('New product added');
       }).catch((error:any) => {
@@ -62,6 +57,8 @@ const PersonForm: React.FC = () => {
       validationSchema={validationSchema}
       onSubmit={(values, { setSubmitting, resetForm }) => {
         console.log(values);
+
+        createNewPerson(values);
         resetForm();
         setSubmitting(false);
       }}
@@ -86,7 +83,7 @@ const PersonForm: React.FC = () => {
             <ErrorMessage name="birthDate" component="div" className="error-message" />
           </div>
 
-          <ContactList contacts={values.contacts} errors={errors.contacts} />
+          <ContactList contacts={values.contacts} newContact={values.newContact} errors={errors.contacts} />
 
           <button type="submit" className="add-contact-button">Submit</button>
         </Form>
